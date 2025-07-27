@@ -1,0 +1,8 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    // Depends only on domain module
+    implementation project(':domain')
+}
