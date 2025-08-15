@@ -59,3 +59,45 @@
 *   `domain` -> (어떤 모듈에도 의존하지 않음)
 
 이러한 구조를 통해 각 계층의 독립성을 보장하고, 비즈니스 로직이 외부 기술 변화에 영향을 받지 않도록 합니다.
+
+---
+
+## 모듈별 가이드라인
+각 모듈의 구현 원칙과 세부 규칙은 아래 가이드라인 문서를 참고하세요. (EN/KR 제공)
+
+- Domain
+  - EN: [domain/Guideline.md](domain/Guideline.md)
+  - KR: [domain/GuideLine_KR.md](domain/GuideLine_KR.md)
+- Application
+  - EN: [application/Guideline.md](application/Guideline.md)
+  - KR: [application/GuideLine_KR.md](application/GuideLine_KR.md)
+- DAL (Data Access Layer)
+  - EN: [dal/Guideline.md](dal/Guideline.md)
+  - KR: [dal/GuideLine_KR.md](dal/GuideLine_KR.md)
+- BootApp
+  - EN: [bootapp/Guideline.md](bootapp/Guideline.md)
+  - KR: [bootapp/GuideLine_KR.md](bootapp/GuideLine_KR.md)
+- Web
+  - EN: [web/Guideline.md](web/Guideline.md)
+  - KR: [web/GuideLine_KR.md](web/GuideLine_KR.md)
+
+추가적으로, 루트의 도움말 문서도 참고할 수 있습니다: [HELP.md](HELP.md)
+
+---
+
+## EN/KR 언어 토글 데모 (단일 문서에서 병기)
+아래는 Markdown 내 HTML `<details>`를 이용해 한 문서에서 한국어/영어를 접고 펼치는 방식으로 함께 제공하는 간단한 예시입니다. GitHub에서 안전하게 동작합니다.
+
+<details>
+  <summary><strong>한국어 보기</strong></summary>
+
+  <p><strong>의존성 규칙</strong>: 의존성은 항상 안쪽 계층을 향해야 합니다. 외부 계층은 내부 계층에 의존할 수 있으나, 내부 계층은 외부 계층에 의존하지 않습니다.</p>
+</details>
+
+<details>
+  <summary><strong>View in English</strong></summary>
+
+  <p><strong>Dependency Rules</strong>: Dependencies must point inwards. Outer layers may depend on inner layers, but inner layers must not depend on outer layers.</p>
+</details>
+
+Tip: If you want a true tab-like UI, you can embed minimal HTML/CSS in Markdown, but some platforms (e.g., GitHub) sanitize custom CSS. The `<details>` approach is the most widely compatible.
