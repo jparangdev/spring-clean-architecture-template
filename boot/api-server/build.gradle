@@ -5,7 +5,8 @@ plugins {
 }
 
 dependencies {
-    implementation project(':dal')
-    implementation project(':web')
+    implementation project(':infrastructure:persistence')
+    implementation project(':infrastructure:storage')
+    implementation project(':presentation:api')
     implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
 }

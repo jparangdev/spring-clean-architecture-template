@@ -1,0 +1,10 @@
+plugins {
+    id 'java-library'
+    id 'io.spring.dependency-management'
+}
+
+dependencies {
+    implementation project(':application')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    // implementation 'com.google.firebase:firebase-admin' // Example for FCM
+}

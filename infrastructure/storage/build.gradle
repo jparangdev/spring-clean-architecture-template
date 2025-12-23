@@ -1,0 +1,10 @@
+plugins {
+    id 'java-library'
+    id 'io.spring.dependency-management'
+}
+
+dependencies {
+    implementation project(':application')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    // implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3' // TODO: Add AWS Dependencies when needed
+}

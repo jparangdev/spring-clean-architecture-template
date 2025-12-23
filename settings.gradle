@@ -2,6 +2,19 @@ rootProject.name = 'spring-clean-architecture-template'
 
 include 'domain'
 include 'application'
-include 'dal'
-include 'web'
-include 'bootapp'
+
+// Infrastructure Layer
+include 'infrastructure:persistence'
+include 'infrastructure:client'
+include 'infrastructure:messaging'
+include 'infrastructure:storage'
+include 'infrastructure:notification'
+
+// Presentation Layer
+include 'presentation:api'
+include 'presentation:batch'
+
+// Boot Layer (Deployable Units)
+include 'boot:api-server'
+include 'boot:batch-server'
+include 'boot:worker-server'

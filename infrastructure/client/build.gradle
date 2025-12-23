@@ -1,0 +1,9 @@
+plugins {
+    id 'java-library'
+    id 'io.spring.dependency-management'
+}
+
+dependencies {
+    implementation project(':application')
+    // implementation 'org.springframework.cloud:spring-cloud-starter-openfeign' // TODO: Add Spring Cloud BOM to root build.gradle
+}
