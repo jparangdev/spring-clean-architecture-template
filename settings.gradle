@@ -5,6 +5,7 @@ include 'application'
 
 // Infrastructure Layer
 include 'infrastructure:persistence'
+include 'infrastructure:transients'
 include 'infrastructure:client'
 include 'infrastructure:messaging'
 include 'infrastructure:storage'

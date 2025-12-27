@@ -5,3 +5,4 @@ plugins {
 dependencies {
     // No dependencies on other modules
 }
+

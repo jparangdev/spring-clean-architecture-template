@@ -1,0 +1,20 @@
+2025-12-27 20:56:05.815  INFO MacBookPro --- [           main] j.b.a.SpringCleanArchitectureApplication : Starting SpringCleanArchitectureApplication using Java 21.0.2 with PID 48887 (/Users/jparangdev/Workspace/spring-clean-architecture-template/boot/api-server/build/classes/java/main started by jparangdev in /Users/jparangdev/Workspace/spring-clean-architecture-template/boot/api-server)
+2025-12-27 20:56:05.817 DEBUG MacBookPro --- [           main] j.b.a.SpringCleanArchitectureApplication : Running with Spring Boot v3.2.4, Spring v6.1.5
+2025-12-27 20:56:05.818  INFO MacBookPro --- [           main] j.b.a.SpringCleanArchitectureApplication : No active profile set, falling back to 1 default profile: "default"
+2025-12-27 20:56:06.789  INFO MacBookPro --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-27 20:56:06.790  INFO MacBookPro --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2025-12-27 20:56:06.790  INFO MacBookPro --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-12-27 20:56:06.814  INFO MacBookPro --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2025-12-27 20:56:06.881  INFO MacBookPro --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2025-12-27 20:56:06.965  INFO MacBookPro --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-12-27 20:56:06.966  INFO MacBookPro --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2025-12-27 20:56:07.074  INFO MacBookPro --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-27 20:56:07.098  INFO MacBookPro --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-12-27 20:56:07.112  INFO MacBookPro --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2025-12-27 20:56:07.242  WARN MacBookPro --- [           main] o.h.o.deprecation                        : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-27 20:56:07.658  INFO MacBookPro --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-27 20:56:07.967  INFO MacBookPro --- [           main] o.r.Version                              : Redisson 3.24.3
+2025-12-27 20:56:07.995  WARN MacBookPro --- [           main] i.n.r.d.DnsServerAddressStreamProviders  : Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2025-12-27 20:56:12.655  INFO MacBookPro --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2025-12-27 20:56:12.659  INFO MacBookPro --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2025-12-27 20:56:12.660  INFO MacBookPro --- [           main] o.a.c.c.StandardService                  : Stopping service [Tomcat]

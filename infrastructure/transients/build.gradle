@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+    id 'io.spring.dependency-management'
+}
+
+dependencies {
+    implementation project(':application')
+    
+    // Spring Data Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    
+    // Redisson for distributed lock
+    implementation 'org.redisson:redisson-spring-boot-starter:3.24.3'
+    
+    // Jackson for JSON serialization
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+}

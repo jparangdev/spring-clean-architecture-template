@@ -1,0 +1,138 @@
+version: '3.8'
+
+services:
+  # Redis - 캐싱 및 세션 관리용
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redpanda - Kafka 호환 메시징 (Zookeeper 불필요, 매우 가벼움)
+  redpanda:
+    image: redpandadata/redpanda:latest
+    container_name: redpanda
+    command:
+      - redpanda
+      - start
+      - --smp
+      - '1'
+      - --memory
+      - '512M'
+      - --reserve-memory
+      - '0M'
+      - --overprovisioned
+      - --node-id
+      - '0'
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
+      - --pandaproxy-addr
+      - 0.0.0.0:8082
+      - --advertise-pandaproxy-addr
+      - localhost:8082
+    ports:
+      - "9092:9092"      # Kafka API
+      - "8082:8082"      # HTTP Proxy (REST API)
+      - "9644:9644"      # Admin API
+    volumes:
+      - redpanda-data:/var/lib/redpanda/data
+    healthcheck:
+      test: ["CMD", "rpk", "cluster", "health"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  # Redpanda Console - 웹 UI로 토픽/메시지 관리 (선택적)
+  redpanda-console:
+    image: redpandadata/console:latest
+    container_name: redpanda-console
+    ports:
+      - "8080:8080"
+    environment:
+      - KAFKA_BROKERS=redpanda:29092
+    depends_on:
+      - redpanda
+    restart: unless-stopped
+
+  # PostgreSQL - 주 관계형 데이터베이스
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=clean_arch
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d clean_arch"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # API Server
+  api-server:
+    build:
+      context: ./boot/api-server
+    container_name: api-server
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/clean_arch
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=redpanda:29092
+    depends_on:
+      redis:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
+  # Batch Server
+  batch-server:
+    build:
+      context: ./boot/batch-server
+    container_name: batch-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/clean_arch
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_BATCH_JDBC_INITIALIZE_SCHEMA=ALWAYS
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=redpanda:29092
+    depends_on:
+      redis:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
+volumes:
+  redis-data:
+  redpanda-data:
+  postgres-data:

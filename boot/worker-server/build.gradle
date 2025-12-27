@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation project(':infrastructure:persistence')
+    implementation project(':infrastructure:transients')
     implementation project(':infrastructure:messaging')
     implementation project(':application')
     implementation 'org.springframework.boot:spring-boot-starter'

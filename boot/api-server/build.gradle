@@ -5,8 +5,12 @@ plugins {
 }
 
 dependencies {
+    implementation project(':application')
     implementation project(':infrastructure:persistence')
+    implementation project(':infrastructure:transients')
+    implementation project(':infrastructure:messaging')
     implementation project(':infrastructure:storage')
+    implementation project(':infrastructure:notification')
     implementation project(':presentation:api')
     implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
 }
